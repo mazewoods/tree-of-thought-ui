@@ -12,13 +12,13 @@ else:
     model = OptimizedOpenAILanguageModel(api_key=api_key, api_base=api_base)
 
 #choose search algorithm('BFS' or 'DFS')
-search_algorithm = "BFS"
+search_algorithm = "DFS"
 
 #cot or propose
-strategy="cot"
+strategy="propose"
 
 # value or vote
-evaluation_strategy = "value"
+evaluation_strategy = "vote"
 
 if not use_v2:
     #create an instance of the tree of thoughts class v1
@@ -27,7 +27,7 @@ else:
     #or v2 -> dynamic beam width -< adjust the beam width [b] dynamically based on the search depth quality of the generated thoughts
     tree_of_thoughts= OptimizedTreeofThoughts(model, search_algorithm)
 
-input_problem = "use 4 numbers and basic arithmetic operations (+-*/) to obtain 24"
+input_problem = "tomorrow is my mothers birthday, she likes the following things: flowers, the color orange. she dislikes the following things: the color blue, and roses. what present should I get her?"
 k = 5
 T = 3
 b = 5

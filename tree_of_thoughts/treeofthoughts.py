@@ -4,6 +4,7 @@ import openai
 import os
 import re
 import time
+import streamlit as st
 
 class AbstractLanguageModel(ABC):
     @abstractmethod
@@ -131,7 +132,8 @@ class OpenAILanguageModel(AbstractLanguageModel):
             response = self.openai_api_call_handler(prompt, 50, 0.5, k)
             thoughts = [self.openai_choice2text_handler(choice) for choice in response.choices]
         # print(thoughts)
-        print(f"Generated thoughts: {thoughts}")
+        #print(f"Generated thoughts: {thoughts}")
+        st.code(f"Generated thoughts: {thoughts}")  # Streamlit print statement
         return thoughts
 
     def evaluate_states(self, states):
@@ -225,11 +227,13 @@ class TreeofThoughts:
         if self.search_algorithm == 'BFS':
             while timeout is None or time.time() - start_time < timeout:
                 result = self.tot_bfs(x, k, T, b)
+                st.code(f"Intermediary BFS result at {time.time() - start_time} seconds: {result}")  # Streamlit print statement
                 if result:
                     return result
         elif self.search_algorithm == 'DFS':
             while timeout is None or time.time() - start_time < timeout:
                 result = self.tot_dfs(x, k, T, vth)
+                st.code(f"Intermediary DFS result at {time.time() - start_time} seconds: {result}")  # Streamlit print statement
                 if result:
                     return result
         else:
