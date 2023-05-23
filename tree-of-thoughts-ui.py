@@ -5,12 +5,15 @@ use_v2 = False
 api_key= st.text_input("Enter your API key")
 api_base= "" # leave it blank if you simply use default openai api url
 
+
 if not use_v2:
     #v1
-    model = OpenAILanguageModel(api_key=api_key, api_base=api_base)
+    if api_key:
+        model = OpenAILanguageModel(api_key=api_key, api_base=api_base)
 else:
     #v2 parallel execution, caching, adaptive temperature
-    model = OptimizedOpenAILanguageModel(api_key=api_key, api_base=api_base)
+    if api_key:
+        model = OptimizedOpenAILanguageModel(api_key=api_key, api_base=api_base)
 
 search_algorithm = st.selectbox("Choose an algorithm", ["DFS", "BFS"])
 strategy = st.selectbox("Choose strategy", ["propose", "cot"])
