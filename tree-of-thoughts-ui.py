@@ -2,7 +2,7 @@ from tree_of_thoughts.treeofthoughts import OpenAILanguageModel, CustomLanguageM
 import streamlit as st
 
 use_v2 = False
-api_key=""
+api_key= st.text_input("Enter your API key")
 api_base= "" # leave it blank if you simply use default openai api url
 
 if not use_v2:
