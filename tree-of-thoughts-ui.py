@@ -21,10 +21,12 @@ evaluation_strategy = st.selectbox("Choose evaluation strategy", ["vote", "value
 
 if not use_v2:
     #create an instance of the tree of thoughts class v1
-    tree_of_thoughts = TreeofThoughts(model, search_algorithm)
+    if model:
+        tree_of_thoughts = TreeofThoughts(model, search_algorithm)
 else:
     #or v2 -> dynamic beam width -< adjust the beam width [b] dynamically based on the search depth quality of the generated thoughts
-    tree_of_thoughts= OptimizedTreeofThoughts(model, search_algorithm)
+    if model:
+        tree_of_thoughts= OptimizedTreeofThoughts(model, search_algorithm)
 
 input_problem = st.text_area("Enter your problem here")
 
